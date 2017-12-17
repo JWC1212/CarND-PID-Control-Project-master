@@ -23,7 +23,7 @@ void PID::UpdateError(double cte) {
     double prev_cte = p_error;//store previous cte.
     p_error = cte;
     i_error = i_error + cte;
-    d_error = cte - prev_cte;
+    d_error = (cte - prev_cte)/0.1;
 }
 
 double PID::TotalError() {
