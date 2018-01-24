@@ -59,7 +59,7 @@ int main()
           * another PID controller to control the speed!
           */
           
-          if (fabs(cte) <0.001) pid.Ki = 0.0;
+          //if (fabs(cte) <0.001) pid.Ki = 0.0;
           pid.UpdateError(cte);
           steer_value = fmod(pid.TotalError(), 2*pi());
           if (steer_value > pi()) steer_value = steer_value - 2*pi();
@@ -72,7 +72,7 @@ int main()
           json msgJson;
           msgJson["steering_angle"] = steer_value;
           //msgJson["throttle"] = 0.3;
-          msgJson["throttle"] = 1.0 - 0.8*fabs(steer_value);
+          msgJson["throttle"] = 1.0 - 0.9*fabs(steer_value);
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
           std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
